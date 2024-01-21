@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Document</title>
+</head>
+<body>
+<!-- ul中选择合适的方式创建50个li节点，然后每一个节点都有自带的删除按钮，要求可以点击删除对应的节点。 -->
+
+<script type="text/html" id="tpl">
+    <li style="margin: 10px">
+        <span>这是第{{num}}个节点</span>
+        <button>删除</button>
+    </li>
+</script>
+
+<script type="text/javascript">
+    const ulDom = document.createElement("ul");
+    // 获取模板中的节点
+    const templateDom = document.getElementById("tpl");
+    const innerText = templateDom.innerHTML;
+    let str = "";
+    const reg = /{{(.*?)}}/;
+    for (let i = 0; i < 50; i++) {
+        str += innerText.replace(reg, i + 1);
+    }
+    ulDom.innerHTML = str
+    document.body.appendChild(ulDom)
+
+    ulDom.addEventListener('click', (e) => {
+        const event = e || window.event
+        const target = e.target || e.srcElement
+        const tagName = target.tagName.toLowerCase()
+
+        if (tagName === 'button') {
+            target.parentNode.remove()
+        }
+    }, false)
+</script>
+</body>
+</html>
