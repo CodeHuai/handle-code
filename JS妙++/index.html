@@ -21,7 +21,7 @@
     const templateDom = document.getElementById("tpl");
     const innerText = templateDom.innerHTML;
     let str = "";
-    const reg = /{{(.*?)}}/;
+    const reg = /{{(.*?)}}/; // 正则解析： .：任意字符；*：0个或者多个；？：非贪婪模式 用括号包裹起来代表是一个表达式，可以匹配 模板中的num
     for (let i = 0; i < 50; i++) {
         str += innerText.replace(reg, i + 1);
     }

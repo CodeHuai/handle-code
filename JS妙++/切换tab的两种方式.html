@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .wrap {
+            width: 500px;
+            height: 500px;
+            margin: 50px auto;
+
+        }
+
+        .tab {
+            line-height: 50px;
+            height: 50px;
+            text-align: center;
+        }
+
+        .tab .item {
+            border: 1px solid #000;
+            float: left;
+            width: 100px;
+            border-bottom: none;
+            cursor: pointer;
+        }
+
+        .tab .item.active {
+            background: black;
+            color: #fff;
+        }
+
+        .page {
+            width: 100%;
+            height: 450px;
+            border: 1px solid #000;
+            overflow: hidden;
+        }
+
+        .page .item {
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+
+        .page .item.current {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="tab">
+        <div class="item active">选项1</div>
+        <div class="item">选项2</div>
+        <div class="item">选项3</div>
+    </div>
+    <div class="page">
+        <div class="item current">页面1</div>
+        <div class="item">页面2</div>
+        <div class="item">页面3</div>
+    </div>
+
+    <script>
+        const tabDom = document.getElementsByClassName('tab')[0]
+        const tabItem = tabDom.getElementsByClassName('item')
+        const pageDom = document.getElementsByClassName('page')[0]
+        const pageItem = pageDom.getElementsByClassName('item')
+
+
+        tabDom.addEventListener('click', (e) => {
+            const event = e || window.event
+            const target = event.target || event.srcElement
+            const className = target.className
+
+            const index = Array.prototype.indexOf.call(tabItem, target)
+
+            if(className === 'item'){
+                Array.from(tabItem).forEach(el => {
+                    el.className = 'item'
+                })
+                Array.from(pageItem).forEach(el => {
+                    el.className = 'item'
+                })
+                Array.from(tabItem)[index].className += ' active'
+                Array.from(pageItem)[index].className += ' current'
+            }
+        }, false)
+    </script>
+</div>
+</body>
+</html>
